@@ -19,17 +19,22 @@ class Hades():
         self.height_map = {
                 "And":2400,
                 "Or":2400,
+                "JK":4800,
                 "Inv":1200,
                 "Ipin":1200,
+                "PulseSwitch":1200,
                 }
         self.latency_map = {
                 "Ipin":"0",
                 "And":"1.0E-8",
                 "Or":"1.0E-8",
                 "Inv":"5.0E-9",
+                "PulseSwitch":"0.1",
+                "JK":"5.0E-9"
                 }
         self.name_map = {
                 "Ipin":"hades.models.io.Ipin",
+                "PulseSwitch":"hades.models.io.PulseSwitch",
                 "And":"hades.models.gates.And",
                 "Or":"hades.models.gates.Or",
                 "Inv":"hades.models.gates.InvSmall",
@@ -101,12 +106,18 @@ import qm
 
 if __name__ == "__main__":
 
+    ZH = 1
     if len(sys.argv) < 3:
         tablafajl = input("Igazságtábla elérési útja: ")
         hadesfajl = input("Hades fájl helye (ha nem létezik, a program létrehozza): ")
+        zh        = input("Hányadik ZH-t készíted? ")
+        if (int(zh) != 1):
+            ZH = 2
     else:
         tablafajl = sys.argv[1]
         hadesfajl = sys.argv[2]
+        if (len(sys.argv)==4):
+            ZH = 2
 
     if not os.path.isfile(tablafajl):
         print(f"{tablafajl} nem létezik vagy nem egy fájl!")
@@ -138,14 +149,23 @@ if __name__ == "__main__":
     print(f"Mintermek:\n{bruh_momentos.join(minterms)}")
     hades.dump_minterms(minterms)
 
-    hades.createComponent("Ipin", "D")
-    hades.createComponent("Ipin", "C")
-    hades.createComponent("Ipin", "B")
-    hades.createComponent("Ipin", "A")
-    hades.createComponent("Inv", "!D", True)
-    hades.createComponent("Inv", "!C")
-    hades.createComponent("Inv", "!B")
-    hades.createComponent("Inv", "!A")
+    if (ZH == 1):
+        hades.createComponent("Ipin", "D")
+        hades.createComponent("Ipin", "C")
+        hades.createComponent("Ipin", "B")
+        hades.createComponent("Ipin", "A")
+        hades.createComponent("Inv", "!D", True)
+        hades.createComponent("Inv", "!C")
+        hades.createComponent("Inv", "!B")
+        hades.createComponent("Inv", "!A")
+    else:
+        hades.createComponent("PulseSwitch", "CLK")
+        hades.createComponent("PulseSwitch", "RST")
+        hades.createComponent("Inv", "!RST")
+        hades.createComponent("JK", "TA", True) 
+        hades.createComponent("JK", "TB", True)
+        hades.createComponent("JK", "TC", True)
+        hades.createComponent("JK", "TD", True)
 
     hades.createComponent(f"And{len(AND[0])}", '*'.join(AND[0]), True)
     for m in AND[1:]:
