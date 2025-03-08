@@ -1,0 +1,116 @@
+table.logic-table {
+    width: auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.logic-table th, .logic-table td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    min-width: 30px;
+}
+
+.logic-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.logic-table th:nth-last-child(-n+7) {
+    background-color: #69BABA;
+}
+
+.logic-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.logic-table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.logic-table td:first-child, .logic-table th:first-child {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+.logic-table select {
+    width: 90%;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: white;
+    text-align: center;
+    font-size: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.logic-table select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+#kv-tables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.kv-table {
+    border-collapse: collapse;
+    margin: 10px;
+    width: 120px;
+    height: 120px;
+    font-size: 12px;
+}
+
+.kv-table th, .kv-table td {
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.one {
+    background-color: lightgreen;
+}
+
+.dont-care {
+    background-color: lightgray;
+}
+
+.kv-table caption {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}
+
+button:disabled {
+    background-color: dimgrey;
+}
