@@ -3,7 +3,7 @@
 Még sose volt ilyen egyszerű digitzéhán csalni!
 Ez a program (majdnem) mindent megcsinál helyetted!
 
-[Webes változat!] (https://ganajtur0.github.io/hadez/)
+[Webes változat!](https://ganajtur0.github.io/hadez/)
 Add meg a logikai táblázatot, majd kattints a **Megold** gombra!
 A KV-táblák megjelennek kitöltve, a **.hds fájl letöltése** gomb pedig a letöltések mappába írja a .hds fájlt.
 
