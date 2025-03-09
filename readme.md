@@ -3,17 +3,24 @@
 Még sose volt ilyen egyszerű digitzéhán csalni!
 Ez a program (majdnem) mindent megcsinál helyetted!
 
+[Webes változat!] (https://ganajtur0.github.io/hadez/)
+Add meg a logikai táblázatot, majd kattints a **Megold** gombra!
+A KV-táblák megjelennek kitöltve, a **.hds fájl letöltése** gomb pedig a letöltések mappába írja a .hds fájlt.
+
+## Python verzió (parancssor)
+
+Az ehhez tartozó fájlok a **python/** mappában találhatók.
+
+Szükség van hozzá egy igazságtáblát tartalmazó .tsv fájlra. Ezt Excelből/LibreOffice Calc kimásolással elő lehet állítani.
+A **minta.tsv** fájl formátumával megegyező legyen.
+
+Kalauz:
 ```
 python3 main.py
 ```
-
-és minden elkészül!
-Mostmár csak a Hades programban való vezetékes élvezkedés van hátra, de azt úgyis mindenki szereti.
-
-Ravaszabb Linukszélvezők :penguin: akár a parancssort is használhatják a gyorsaság kedvéért:
-
+Parancssori argumentumok:
 ```
 python3 main.py igazsagtabla.tsv hades.hds
 ```
 
-Ügyeljünk rá, hogy a **main.py** és a **qm.py** fájlok egy mappában legyenek!
+A **main.py** és a **qm.py** fájlok egy mappában legyenek!

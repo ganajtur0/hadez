@@ -1,6 +1,3 @@
-// TODO: fix hades export for multiple variables
-
-
 function hades_compile(functions) {
 
     const hades = new HadesManager();
@@ -14,6 +11,24 @@ function hades_compile(functions) {
     hades.createComponent("Inv", "!B")
     hades.createComponent("Inv", "!A")
 
+    let and_expressions = [];
+
+    for (let [_,fun] of Object.entries(functions)) {
+        if (fun === "0") {
+            continue;
+        }
+
+        and_expressions.push(...fun.split("+"));
+    }
+
+    hades.newLayer();
+
+    and_expressions.forEach((and_expr) => {
+        hades.createComponent(`And${and_expr.split("*").length}`, and_expr);
+    });
+
+    hades.newLayer();
+
     for (let [_,fun] of Object.entries(functions)) {
 
         if (fun === "0") {
@@ -22,15 +37,8 @@ function hades_compile(functions) {
 
         const and_expressions = fun.split("+");
 
-        hades.newLayer();
-        and_expressions.forEach((and_expr) => {
-            hades.createComponent(`And${and_expr.split("*").length}`, and_expr);
-        });
-
-        hades.newLayer();
-
         if (and_expressions.length == 1) {
-            return hades;
+            continue;
         }
 
         if (and_expressions.length <= 4) {
@@ -53,7 +61,6 @@ function hades_compile(functions) {
         }
 
     }
-    // console.log(hades.components);
     return hades;
 }
 
@@ -128,7 +135,7 @@ function generateKVTable(variable, data, func) {
     for (const row of [
         [0, 8, 12, 4],
         [2, 10, 14, 6],
-        [3, 11, 15, 17],
+        [3, 11, 15, 7],
         [1, 9, 13, 5]]) {
         let tr = document.createElement("tr");
         for (const index of row) {
@@ -160,16 +167,12 @@ function renderKVTables(minterms, functions) {
 }
 
 function createHadesFile(hades) {
-    let hades_file_link = document.getElementById("hades_file");
-    if (hades_file_link != null) {
-        document.body.removeChild(hades_file_link);
-    }
     document.getElementById("letolt_gomb").disabled = false;
 
     let element = document.createElement('a');
     element.setAttribute('id', 'hades_file');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(hades.toString()));
-    element.setAttribute('download', 'zh1.hds');
+    element.setAttribute('download', 'generalt.hds');
 
     element.style.display = 'none';
     document.body.appendChild(element);
