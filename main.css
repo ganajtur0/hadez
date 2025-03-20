@@ -22,7 +22,7 @@ table.logic-table {
     padding: 6px;
 }
 
-.logic-table th:nth-last-child(-n+7) {
+.logic-table th:nth-last-child(-n+5) {
     background-color: #69BABA;
 }
 

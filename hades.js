@@ -2,8 +2,10 @@ class HadesManager {
     constructor() {
         this.gap = 1200;
         this.prev = "";
-        this.layerY = 0;
         this.x = 0;
+        // stores the y values of the layers
+        this.layers = [0,0,0,0,0];
+        this.current_layer = 0;
         
         this.widthMap = {
             "And": 3600,
@@ -43,9 +45,18 @@ class HadesManager {
         this.components = [];
     }
 
-    newLayer() {
-        this.layerY = 0;
+    nextLayer() {
+        if (this.layers.length-1 == this.current_layer) {
+            this.layers.push(0);
+        }
+        this.current_layer++;
         this.x += this.gap + this.widthMap[this.prev];
+    }
+
+    prevLayer() {
+        if (this.current_layer == 0) return;
+        this.current_layer--;
+        this.x -= this.gap + this.widthMap[this.prev];
     }
 
     createComponent(t, name) {
@@ -60,9 +71,9 @@ class HadesManager {
             type = t;
         }
         this.components.push(
-            `${this.nameMap[type]}${n} ${name} ${this.x} ${this.layerY} @N 1001 ${this.latencyMap[type]}`
+            `${this.nameMap[type]}${n} ${name} ${this.x} ${this.layers[this.current_layer]} @N 1001 ${this.latencyMap[type]}`
         );
-        this.layerY += this.heightMap[type];
+        this.layers[this.current_layer] += this.heightMap[type];
         this.prev = type;
     }
 
