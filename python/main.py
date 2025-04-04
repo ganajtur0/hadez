@@ -159,7 +159,7 @@ if __name__ == "__main__":
         exit()
     tabla = Tabla(fname=tablafajl)
     hades = Hades(hadesfajl)
-    qm_solver = qm.QM(list("ABCD"))
+    qm_solver = qm.QM(list("DCBA"))
 
     functions = [
         qm_solver.get_as_list(qm_solver.solve(ones=tabla.termek[i], dc=tabla.dck[i])[1])
@@ -229,6 +229,12 @@ if __name__ == "__main__":
                 )
                 hades.createComponent("Or3", "+".join("*".join(x) for x in OR[0][3:]))
                 buffer.append(("Or2", "+".join("*".join(x) for x in OR[0])))
+            case 7:
+                hades.createComponent(
+                    "Or3", "+".join("*".join(x) for x in OR[0][:3]), True
+                )
+                hades.createComponent("Or4", "+".join("*".join(x) for x in OR[0][3:]))
+                buffer.append(("Or2", "+".join("*".join(x) for x in OR[0])))
             case other:
                 pass
 
@@ -246,6 +252,12 @@ if __name__ == "__main__":
                     hades.createComponent("Or3", "+".join("*".join(x) for x in _or[:3]))
                     hades.createComponent("Or3", "+".join("*".join(x) for x in _or[3:]))
                     buffer.append(("Or2", "+".join("*".join(x) for x in _or)))
+                case 7:
+                    hades.createComponent(
+                        "Or3", "+".join("*".join(x) for x in OR[0][:3]), True
+                    )
+                    hades.createComponent("Or4", "+".join("*".join(x) for x in OR[0][3:]))
+                    buffer.append(("Or2", "+".join("*".join(x) for x in OR[0])))
                 case other:
                     pass
 
